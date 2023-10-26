@@ -1,0 +1,66 @@
+Getting References:
+
+javascript
+Copy code
+// Get references to the input field, add button, and task list container
+const inputField = document.getElementById("input-write-down-task");
+const addButton = document.getElementById("add-button");
+const taskList = document.getElementById("task-list");
+In this section, we use document.getElementById to get references to the HTML elements you've defined in your HTML. inputField refers to the input where you type in your tasks, addButton is the button you click to add tasks, and taskList is the container where tasks will be displayed.
+
+Adding a Task:
+
+javascript
+addButton.addEventListener("click", function () {
+    const taskText = inputField.value;
+    if (taskText.trim() === "") return; // Don't add empty tasks
+
+    const taskItem = document.createElement("div");
+    taskItem.classList.add("task");
+    taskItem.innerHTML = `
+        <span>${taskText}</span>
+        <button class="done">Done</button>
+    `;
+
+    taskList.appendChild(taskItem);
+    inputField.value = "";
+});
+This part of the code is executed when the "Add" button is clicked.
+
+We get the value from the inputField, which is the text you entered.
+We check if the input is empty (no text). If it is, we exit the function and do not add an empty task.
+We create a new div element, set its class to "task," and add the task text and a "Done" button inside it.
+This task item is then appended to the taskList container.
+Finally, we clear the input field.
+Marking a Task as Done or Deleting:
+
+javascript
+Copy code
+const doneButton = taskItem.querySelector(".done");
+doneButton.addEventListener("click", function () {
+    taskItem.classList.toggle("completed");
+    if (taskItem.classList.contains("completed")) {
+        doneButton.textContent = "Delete";
+        doneButton.classList.add("delete");
+        doneButton.classList.remove("done");
+    } else {
+        doneButton.textContent = "Done";
+        doneButton.classList.add("done");
+        doneButton.classList.remove("delete");
+    }
+});
+
+doneButton.addEventListener("click", function () {
+    taskList.removeChild(taskItem);
+});
+This section handles the functionality of marking a task as "Done" or deleting it when the task's associated button is clicked.
+
+We first get a reference to the "Done" button for the current task.
+We add a click event listener to the "Done" button that toggles the class "completed" on the task item. This class is used to change the background color and strike through the task text to visually represent a completed task.
+Depending on whether the task is marked as "completed" or not, we change the button's text to "Delete" or "Done," and we update its class accordingly.
+We also add another click event listener to the "Done" button, which, when clicked, removes the task item from the taskList container, effectively deleting it.
+This JavaScript code allows you to add tasks, mark them as done, and delete them as per your initial description. The use of event listeners and DOM manipulation helps achieve these interactions. It's a basic but effective example of how to create dynamic web applications using JavaScript.
+
+
+
+
