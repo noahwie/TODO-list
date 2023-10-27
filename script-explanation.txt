@@ -18,7 +18,7 @@ addButton.addEventListener("click", function () {
     const taskItem = document.createElement("div");
     taskItem.classList.add("task");
     taskItem.innerHTML = `
-        <span>${taskText}</span>
+        <span class="task-span">${taskText}</span>
         <button class="done">Done</button>
     `;
 
